@@ -76,7 +76,7 @@ export default async function Email(props) {
         ):
         (
             <div style={{ textAlign: "center" }}>
-                    <h3>"{email}"님의 예약된 항공편이 없습니다.</h3>
+                    <h3>&quot;{email}&quot;님의 예약된 항공편이 없습니다.</h3>
             </div>
         )}
         </div>

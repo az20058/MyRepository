@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 import Link from "next/link";
 import {getLoginState} from "./hook";
 
-export default function home(){
+export default function Home(){
     const router = useRouter();
     const arrCityRef = useRef();
     const depCityRef = useRef();

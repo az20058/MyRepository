@@ -99,7 +99,7 @@ export default async function FlightList(props){
                     )    
                 })
             ) : (
-                <div>"{param.depCity}행 ~ {param.arrCity}행"에 대한 검색 결과가 없습니다.</div>
+                <div>&quot;{param.depCity}행 ~ {param.arrCity}행&quot;에 대한 검색 결과가 없습니다.</div>
             )}
         </div>
     );

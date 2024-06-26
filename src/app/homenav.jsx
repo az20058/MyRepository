@@ -9,7 +9,7 @@ import { usePathname } from 'next/navigation';
 import cookie from "js-cookie";
 import { useRouter } from 'next/navigation';
 
-export default function homenav() {
+export default function Homenav() {
   const [isLogin, setIsLogin] = useState(getLoginState());
   const pathName = usePathname();
   const [userName, setUserName] = useState(null);
