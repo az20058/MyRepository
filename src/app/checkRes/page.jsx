@@ -2,10 +2,7 @@
 import ComboBox from "../combobox";
 import { useRef, useState } from "react";
 import { Button } from "react-bootstrap";
-import axios from "axios"
-import { getLoginState } from "../hook"
 import { useRouter } from "next/navigation";
-import styled from "styled-components";
 
 export default function CheckRes(){
     const router = useRouter();
