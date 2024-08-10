@@ -53,7 +53,7 @@ export default async function FlightList(props){
             break;
     }
     
-    const res = await axios.get(`http://apis.data.go.kr/1613000/DmstcFlightNvgInfoService/getFlightOpratInfoList?serviceKey=yYPhL018gXICrB9mbOIIr22W%2F5M26RO%2FFjYxxK7JHrd3R2MVGqZVJHYRT7QtXiQ629T3GK4SnyKtLY7u6kjUAg%3D%3D&numOfRows=100&depAirportId=${depCityCode}&arrAirportId=${arrCityCode}&depPlandTime=${param.date}`);
+    const res = await axios.get(`http://apis.data.go.kr/1613000/DmstcFlightNvgInfoService/getFlightOpratInfoList?serviceKey=${process.env.NEXT_FLIGHT_API_KEY}&numOfRows=100&depAirportId=${depCityCode}&arrAirportId=${arrCityCode}&depPlandTime=${param.date}`);
     const list = await res.data.response.body.items.item;
 
     const filteredList = list.filter(data => data.economyCharge != null && parseInt(data.depPlandTime)>parseInt(formattedTime));
