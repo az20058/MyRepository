@@ -43,7 +43,7 @@ export default function Pay({flightId, depTime, arrTime, date, airLine, prestige
     
     return (
         <>
-            <Button onClick={processPay} className="btn_pay" variant="primary">예약</Button>{' '}
+            <button onClick={processPay} className="main_search" variant="primary">예약</button>{' '}
         </>
     )
     }

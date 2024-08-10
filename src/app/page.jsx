@@ -1,28 +1,39 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Button } from "react-bootstrap";
-import Link from "next/link";
-import {getLoginState} from "./hook";
 
 export default function Home(){
     const router = useRouter();
     const arrCityRef = useRef();
     const depCityRef = useRef();
+    let view = "829,091,839,019";
+    let nowView = "17189";
     const dateRef = useRef();
-    const quaRef = useRef();
     const [quantity, setQuantity] = useState(1);
-    const [isLogin, setIsLogin] = useState(getLoginState());
     const today = new Date().toISOString().slice(0,10);
 
     function searchCity() {
         router.push(`/flightList?depCity=${depCityRef.current.value.trim()}&arrCity=${arrCityRef.current.value.trim()}&date=${dateRef.current.value.replace(/-/g, "")}&quantity=${quantity}`);
     }
+
+    function plusQuantity() {
+        if(quantity===9)
+            return;
+        setQuantity(quantity+1);
+    }
+
+    function minusQuantity() {
+        if(quantity===1)
+            return;
+        setQuantity(quantity-1);
+    }
     
     return (
         <div className="home">
-            <div className="search">
-                <div className="searchWrapper">
+            <div className="search sm:w-[45vw] w-[100vw]">
+                <div className="logo"></div>
+                <div className="searchWrapper sm:w-full">
                     <div>
                         <select ref={depCityRef}>
                             <option value="서울">서울</option>
@@ -48,16 +59,30 @@ export default function Home(){
                         <input type="date" id="searchDate" max="2077-06-20" min={today} ref={dateRef} defaultValue={today}/>
                     </div>
                     <div>
-                        <Button onClick={()=>setQuantity(quantity-1)}>-</Button>
+                        <Button onClick={minusQuantity}>-</Button>
                     </div>
                     <div>
                         <span>{quantity}명</span>
                     </div>
                     <div>
-                        <Button onClick={()=>setQuantity(quantity+1)}>+</Button>
+                        <Button onClick={plusQuantity}>+</Button>
                     </div>
                     <div>
-                        <Button onClick={searchCity} variant="primary">검색</Button>{' '}
+                        <button className="main_search" onClick={searchCity} variant="primary">검색</button>{' '}
+                    </div>
+                </div>
+                <div className="use">
+                    <div className="inline">
+                        <span>Total use  : </span>
+                        <div className="accumulate">
+                            <span className="acc_view">{view}</span>
+                        </div>
+                    </div>
+                    <div className="inline">
+                        <span>Today use : </span>
+                        <div className="today">
+                            <span className="acc_view">{nowView}</span>
+                        </div>
                     </div>
                 </div>
             </div>

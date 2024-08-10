@@ -298,6 +298,7 @@ background text
     transform: scale(1.5);
   }
 }
+
 .cont_form_login {
   position: absolute;
   opacity: 0;
@@ -382,6 +383,237 @@ background text
   }
 }
 
+.section {
+  min-height: 92vh;
+  background-color: #cfd8dc;
+  margin-top : 56px;
+}
+
+.combo-input {
+  width: 200px;
+  padding: 5px;
+  margin: auto 10px;
+}
+
+.seat {
+  position: relative;
+  width: 40px;
+    height: 40px;
+    background-color: #898977;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+    opacity: 0.5;
+}
+
+.seat:hover{
+  opacity: 1;
+  transition: all 0.7s;
+}
+
+.selectedSeat{
+  width: 40px;
+    height: 40px;
+    background-color: #d80f0f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+}
+
+.reservedSeat {
+  position: relative;
+  width: 40px;
+    height: 40px;
+    background-color: #555549;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+}
+
+.reservedSeat::before,
+.reservedSeat::after {
+  content: '';
+  position: absolute;
+  width: 2px; /* 선의 두께 */
+  height: 100%; /* 선의 길이 */
+  background-color: white; /* 선의 색상 */
+}
+
+.reservedSeat::before {
+  transform: rotate(45deg);
+}
+
+.reservedSeat::after {
+  transform: rotate(-45deg);
+}
+
+.selectedSeat:hover {
+  opacity: 1;
+  transition: all 0.7s;
+}
+
+.formWrapper {
+  margin: 0 auto;
+  width: 50%;
+}
+
+.flightItem {
+  align-items: center;
+  display: flex;
+  width: 50%;
+  background-color:#fff;
+  padding : 15px 10px;
+  border : solid black 1px;
+  border-radius: 10px;
+  margin: 4px auto;
+}
+
+.flightItem > div {
+  text-align: center;
+  flex:1;
+  margin: 0 auto;
+}
+
+.main_search {
+  color: white;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  padding: 0.375rem 0.75rem;
+}
+
+.main_search:hover {
+  transition: 0.5s;
+  background-color: #053780;
+}
+
+.refund_btn {
+  color: white;
+  background-color: #d71616;
+  border-color: #d71616;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  padding: 0.375rem 0.75rem;
+}
+
+.refund_btn:hover {
+  transition: 0.5s;
+  background-color: #5f0303;
+}
+
+.seatPage {
+  top: 20vh;
+  display: grid;
+  height: 60vh;
+  gap: 10px;
+}
+
+.seatPage::before {
+  content: '';
+  display: block;
+  height: 5vh;
+}
+
+.seatWrapper {
+  gap: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  margin: 20px auto;
+  align-items: center;
+}
+
+.btnWrapper {
+  margin:0 50vh;
+  text-align: center;
+}
+
+.fromToFinal{
+  margin:  auto;
+  width: 90vh;
+  text-align: center;
+  font-size: larger;
+  transform: translateY(50px)
+}
+
+@media screen and (max-width: 480px) {
+  .section {
+    height: 95vh;
+  }
+  .searchWrapper {
+    font-size: x-small;
+  }
+  .main_search {
+    padding: 0.4rem 0.25rem;
+    font-size: x-small;
+  }
+  .refund_btn {
+    padding: 0.4rem 0.25rem;
+    font-size: x-small;
+  }
+  .flightItem {
+    height: 10vh;
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    font-size: x-small;
+  }
+  .flightItem > div{
+    width:20%;
+  }
+  .flightItem > div:nth-child(3) {
+    width:10%;
+  }
+  .formWrapper {
+    font-size: smaller;
+    width: 80%;
+  }
+  .form_controll {
+    font-size: smaller;
+  }
+  .seatWrapper {
+    width: 100%;
+    gap: 5px;
+  }
+  .seat {
+    font-size: 12px;
+    width: 40px;
+  }
+  .selectedSeat {
+    font-size: 12px;
+  }
+  .reservedSeat {
+    font-size: 12px;
+  }
+  .seatPage {
+    margin: 0 auto;
+    height: 35vh;
+    display: block;
+  }
+  .btnWrapper {
+    margin: auto;
+  }
+  .fromToFinal {
+    width: auto;
+    display: flex;
+  }
+  .combo-input {
+    width: 100px;
+    font-size: x-small;
+  }
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -403,6 +635,7 @@ body {
 }
 
 .header {
+  z-index: 100;
   width: 100%;
   position : fixed;
   top : 0;
@@ -426,13 +659,22 @@ body {
 }
 
 .searchWrapper {
+  width: 100%;
   height: 60px;
   display: flex;
-  align-items: center;
-  width: 80vh; 
+  align-items: center; 
   background-color: white;
   border-radius: 8px;
   padding:0;
+}
+
+.logo {
+  z-index: 0;
+  position: relative;
+  border-radius: 20px 20px 0 0;
+  margin: 0 auto;
+  background:url('./file.png') center;
+  height:300px;
 }
 
 .searchWrapper > div {
@@ -455,39 +697,16 @@ body {
 }
 
 .search {
-  display: flex;
+  position: relative;
   align-items: center;
-  margin-bottom: 7%;
 }
 
 #searchIcon {
   display: inline-block;
 }
 
-.section {
-  min-height: 92vh;
-  background-color: #cfd8dc;
-  margin-top : 56px;
-}
-
-.formWrapper {
-  margin: 0 auto;
-  width: 50%;
-}
-
 .airLine {
   font-weight: 180;
-}
-
-.flightItem {
-  align-items: center;
-  display: flex;
-  width: 50%;
-  background-color:#fff;
-  padding : 15px 10px;
-  border : solid black 1px;
-  border-radius: 10px;
-  margin: 4px auto;
 }
 
 .flexTime {
@@ -500,12 +719,6 @@ body {
   display: none;
 }
 
-.flightItem > div {
-  text-align: center;
-  flex:1;
-  margin: 0 auto;
-}
-
 .flightItemWrapper {
   height: 100%;
   background-color: #cfd8dc;
@@ -516,9 +729,12 @@ body {
   margin-right: 10px;
 }
 
+.seatPageWrapper {
+  margin: 0 auto;
+}
+
 .price {
   text-align: center;
-  width: 30vh;
 }
 
 .arrow {
@@ -548,54 +764,6 @@ span {
   float:right;
 }
 
-.seatPage {
-  top: 20vh;
-  display: grid;
-  height: 60vh;
-  gap: 10px;
-}
-
-.seatPage::before {
-  content: '';
-  display: block;
-  height: 5vh;
-}
-
-.seatWrapper {
-  gap: 10px;
-  display: flex;
-  justify-content: space-between;
-  width: 70%;
-  margin: 20px auto;
-  align-items: center;
-}
-
-.seat {
-  width: 40px;
-    height: 40px;
-    background-color: #4CAF50;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    border-radius: 5px;
-    color: white;
-  /* height: 40px;
-  border: solid 1px black; */
-}
-
-.selectedSeat {
-  width: 40px;
-    height: 40px;
-    background-color: #d80f0f;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    border-radius: 5px;
-    color: white;
-}
-
 .tmpselectedSeat {
   width: 40px;
     height: 40px;
@@ -606,11 +774,6 @@ span {
     cursor: pointer;
     border-radius: 5px;
     color: white;
-}
-
-.btnWrapper {
-  margin:0 50vh;
-  text-align: center;
 }
 
 .viewWrapper {
@@ -628,9 +791,10 @@ span {
 }
 
 .passengers {
-  padding: 5px;
+  padding: 10px 20px;
   border-radius: 10px;
-  background-color: #bdd8e3;
+  background-color: #85d2f0;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
 }
 
 .passengersWrapper {
@@ -644,11 +808,7 @@ span {
   position: relative;
   display: inline-block;
 }
-.combo-input {
-  width: 200px;
-  padding: 5px;
-  margin: auto 10px;
-}
+
 .combo-dropdown {
   position: absolute;
   top: 100%;
@@ -671,11 +831,34 @@ span {
   justify-content: center;
 }
 
-.selectedFind {
-  padding: 5px 10px;
+.selectedFind-active {
+  position: relative;
+  padding: 8px 10px;
   margin: 10px 5px;
   background-color:#b0bec5;
   cursor: pointer;
+  border-radius: 10px;
+}
+
+.selectedFind {
+  position: relative;
+  padding: 8px 10px;
+  margin: 10px 5px;
+  background-color:#b0bec5;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.selectFindBy .selectedFind-active::after {
+    content: "";
+    display: inline-block;
+    clear: both;
+    border: 8px solid transparent;
+    border-top-color: #3f5b6b;
+    position:absolute;
+    bottom: -16px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .findByText {
@@ -707,15 +890,70 @@ span {
     height: 80vh;
 }
 
-.fromToFinal{
-  margin:  auto;
-  width: 90vh;
-  text-align: center;
-  font-size: larger;
-  transform: translateY(50px)
-}
-
 .infoWrapper{
   margin:0 auto;
   width: 60%;
 }
+
+.m2{
+  margin-top:20px;
+}
+
+.accumulate{
+  width: 50px;
+      height: 50px;
+      padding: 10px;
+      color: white;
+      background-color: rgb(154, 162, 247);
+      transition-property: width, opacity, content;
+      transition-duration: 1s;
+}
+
+.accumulate:hover {
+  content: "1829";
+  width:250px;
+}
+
+.today{
+  width: 50px;
+      height: 50px;
+      padding: 10px;
+      color: white;
+      background-color: rgb(154, 162, 247);
+      transition-property: width, opacity, content;
+      transition-duration: 1s;
+}
+
+.today:hover {
+  width:160px;
+}
+
+.acc_view {
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 0.5s;
+}
+
+.accumulate:hover .acc_view {
+  opacity: 1;
+}
+
+.today:hover .acc_view {
+  opacity: 1;
+}
+
+.inline{
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+}
+
+.inline>:first-child {
+  width: 100px;
+}
+
+.inline *{
+  margin-right: 10px;
+}
+

@@ -1,17 +1,20 @@
 "use client";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Button } from "react-bootstrap"
-export default function Refund({num, number}){
+export default function CheckSeat({num, number, data}){
     const router = useRouter();
-    
-    async function handleRefund(){
-        router.push(`/reservation/${num}/seat?type=1&num=${number}`);
+    let seats=[];
+    data.map((item)=>{
+        seats.push(item.num);
+    });
+    console.log(seats);
+    async function handleCheckSeat(){
+        router.push(`/reservation/${num}/seat?type=1&num=${number}&seats=${seats}`);
     }
     
     return(
         <>
-            <Button variant="primary" onClick={handleRefund}>좌석 확인</Button>{' '}
+            <button className="main_search" onClick={handleCheckSeat}>좌석 확인</button>{' '}
         </>
     )
 }

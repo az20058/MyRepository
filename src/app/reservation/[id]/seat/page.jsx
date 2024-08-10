@@ -4,7 +4,7 @@
     import { useEffect, useState } from "react";
     import { useRouter, useSearchParams } from "next/navigation";
     import queryString from "query-string";
-import { Button } from "react-bootstrap";
+    import { Button } from "react-bootstrap";
 
     export default function Seat(props){
         const [data, setData]=useState(null);
@@ -14,10 +14,19 @@ import { Button } from "react-bootstrap";
         const param = useSearchParams();
         const quantity = param.get("quantity");
         const type = param.get("type");
-        const seatNum = param.get("num");
+        const [seats, setSeats] = useState(null);
         const [count, setCount] = useState(parseInt(quantity));
+        console.log(seats);
 
         useEffect(() => {
+            if(type==="1"){
+                setSeats(param.get("seats").split(','));
+                console.log(seats);
+            }
+            else{
+                setSeats(['dummy']);
+            }
+            
             const seatFetch = async () => {
                 try {
                     const res = await axios.get(`http://localhost:8080/seat/${props.params.id}`);
@@ -119,46 +128,72 @@ import { Button } from "react-bootstrap";
         
         return( //.filter을 사용하여 왼쪽 오른쪽 중앙의 좌석을 따로따로 배치
         <>
-            <div className="seatPage"> 
-                <div className="seatWrapper">
-                    {data&&data.filter((seat, index)=>(index<3)).map((seat, index)=>(
-                        <button key={seat.num} className={isSeatSelected(index)||(seat.tmpRes==="true"||seat.isRes==="true")?"selectedSeat":"seat"} onClick={()=>handleReservation(index, seat.num)} 
-                        disabled={(seat.tmpRes==="true"||seat.isRes==="true")||type==="1"}>{(seat.tmpRes==="true"||seat.isRes==="true")&&seat.num!=seatNum?"예약":"a-"+seat.num%20}</button>
-            ))}
-                    <div></div>
-                    {data&&data.filter((seat, index)=>(index<7&&index>2)).map((seat, index)=>(
-                        <button key={seat.num} className={isSeatSelected(index+3)||(seat.tmpRes==="true"||seat.isRes==="true")?"selectedSeat":"seat"} onClick={()=>handleReservation(index+3, seat.num)} 
-                        disabled={(seat.tmpRes==="true"||seat.isRes==="true")||type==="1"}>{(seat.tmpRes==="true"||seat.isRes==="true")&&seat.num!=seatNum?"예약":"a-"+seat.num%20}</button>
-            ))}
-                    <div></div>
-                    {data&&data.filter((seat, index)=>(index<10&&index>6)).map((seat, index)=>(
-                        <button key={seat.num} className={isSeatSelected(index+7)||(seat.tmpRes==="true"||seat.isRes==="true")?"selectedSeat":"seat"} onClick={()=>handleReservation(index+7, seat.num)} 
-                        disabled={(seat.tmpRes==="true"||seat.isRes==="true")||type==="1"}>{(seat.tmpRes==="true"||seat.isRes==="true")&&seat.num!=seatNum?"예약":"a-"+seat.num%20}</button>
-            ))}
+            <div className="seatPageWrapper">
+                <div className="seatPage"> 
+                    <div className="seatWrapper">
+                        {data&&data.filter((seat, index)=>(index<3)).map((seat, index)=>(
+                            <button key={seat.num} className={(isSeatSelected(index)||seats.includes(seat.num.toString()))
+                                ? "selectedSeat"
+                                : (seat.isRes === "true" || seat.tmpRes === "true")
+                                ? "reservedSeat"
+                                : "seat"} onClick={()=>handleReservation(index, seat.num)} 
+                            disabled={(seat.tmpRes==="true"||seat.isRes==="true")||type==="1"}>{(seat.tmpRes==="true"||seat.isRes==="true")&&!seats.some(num=>num===seat.num.toString())?"":"a-"+seat.num%20}</button>
+                ))}
+                        <div></div>
+                        {data&&data.filter((seat, index)=>(index<7&&index>2)).map((seat, index)=>(
+                            <button key={seat.num} className={(isSeatSelected(index+3)||seats.includes(seat.num.toString()))
+                                ? "selectedSeat"
+                                : (seat.isRes === "true" || seat.tmpRes === "true")
+                                ? "reservedSeat"
+                                : "seat"} onClick={()=>handleReservation(index+3, seat.num)} 
+                            disabled={(seat.tmpRes==="true"||seat.isRes==="true")||type==="1"}>{(seat.tmpRes==="true"||seat.isRes==="true")&&!seats.some(num=>num===seat.num.toString())?"":"a-"+seat.num%20}</button>
+                ))}
+                        <div></div>
+                        {data&&data.filter((seat, index)=>(index<10&&index>6)).map((seat, index)=>(
+                            <button key={seat.num} className={(isSeatSelected(index+7)||seats.includes(seat.num.toString()))
+                                ? "selectedSeat"
+                                : (seat.isRes === "true" || seat.tmpRes === "true")
+                                ? "reservedSeat"
+                                : "seat"} onClick={()=>handleReservation(index+7, seat.num)} 
+                            disabled={(seat.tmpRes==="true"||seat.isRes==="true")||type==="1"}>{(seat.tmpRes==="true"||seat.isRes==="true")&&!seats.some(item=>item===seat.num.toString())?"":"a-"+seat.num%20}</button>
+                ))}
+                    </div>
+                    <div className="seatWrapper">
+                        {data&&data.filter((seat, index)=>(index<=12&&index>=10)).map((seat, index)=>(
+                            <button key={seat.num} className={(isSeatSelected(index+10)||seats.includes(seat.num.toString()))
+                                ? "selectedSeat"
+                                : (seat.isRes === "true" || seat.tmpRes === "true")
+                                ? "reservedSeat"
+                                : "seat"} onClick={()=>handleReservation(index+10, seat.num)} 
+                            disabled={(seat.tmpRes==="true"||seat.isRes==="true")||type==="1"}>{(seat.tmpRes==="true"||seat.isRes==="true")&&!seats.some(num=>num===seat.num.toString())?"예약":"b-"+seat.num%10}</button>
+                ))}
+                        <div></div>
+                        {data&&data.filter((seat, index)=>(index<17&&index>12)).map((seat, index)=>(
+                            <button key={seat.num} className={(isSeatSelected(index+13)||seats.includes(seat.num.toString()))
+                                ? "selectedSeat"
+                                : (seat.isRes === "true" || seat.tmpRes === "true")
+                                ? "reservedSeat"
+                                : "seat"} onClick={()=>handleReservation(index+13, seat.num)} 
+                            disabled={(seat.tmpRes==="true"||seat.isRes==="true")||type==="1"}>{(seat.tmpRes==="true"||seat.isRes==="true")&&!seats.some(num=>num===seat.num.toString())?"":"b-"+seat.num%10}</button>
+                ))}
+                        <div></div>
+                        {data&&data.filter((seat, index)=>(index<20&&index>16)).map((seat, index)=>(
+                            <button key={seat.num} className={(isSeatSelected(index+17)||seats.includes(seat.num.toString()))
+                                ? "selectedSeat"
+                                : (seat.isRes === "true" || seat.tmpRes === "true")
+                                ? "reservedSeat"
+                                : "seat"} onClick={()=>handleReservation(index+17, seat.num)} 
+                            disabled={(seat.tmpRes==="true"||seat.isRes==="true")||type==="1"}>{(seat.tmpRes==="true"||seat.isRes==="true")&&!seats.some(num=>num===seat.num.toString())?"":"b-"+((seat.num-1)%10+1)}</button>
+                ))}
+                    </div>
                 </div>
-                <div className="seatWrapper">
-                    {data&&data.filter((seat, index)=>(index<=12&&index>=10)).map((seat, index)=>(
-                        <button key={seat.num} className={isSeatSelected(index+10)||(seat.tmpRes==="true"||seat.isRes==="true")?"selectedSeat":"seat"} onClick={()=>handleReservation(index+10, seat.num)} 
-                        disabled={(seat.tmpRes==="true"||seat.isRes==="true")||type==="1"}>{(seat.tmpRes==="true"||seat.isRes==="true")&&seat.num!=seatNum?"예약":"b-"+seat.num%10}</button>
-            ))}
-                    <div></div>
-                    {data&&data.filter((seat, index)=>(index<17&&index>12)).map((seat, index)=>(
-                        <button key={seat.num} className={isSeatSelected(index+13)||(seat.tmpRes==="true"||seat.isRes==="true")?"selectedSeat":"seat"} onClick={()=>handleReservation(index+13, seat.num)} 
-                        disabled={(seat.tmpRes==="true"||seat.isRes==="true")||type==="1"}>{(seat.tmpRes==="true"||seat.isRes==="true")&&seat.num!=seatNum?"예약":"b-"+seat.num%10}</button>
-            ))}
-                    <div></div>
-                    {data&&data.filter((seat, index)=>(index<20&&index>16)).map((seat, index)=>(
-                        <button key={seat.num} className={isSeatSelected(index+17)||(seat.tmpRes==="true"||seat.isRes==="true")?"selectedSeat":"seat"} onClick={()=>handleReservation(index+17, seat.num)} 
-                        disabled={(seat.tmpRes==="true"||seat.isRes==="true")||type==="1"}>{(seat.tmpRes==="true"||seat.isRes==="true")&&seat.num!=seatNum?"예약":"b-"+((seat.num-1)%10+1)}</button>
-            ))}
-                </div>
-            </div>
-            <div className="btnWrapper">
-                {type!=="1"?
-                    (<Button onClick={handleSubmit} variant="primary">좌석 선택</Button>):
-                    (<></>)
-                }
-            </div>      
+                <div className="btnWrapper">
+                    {type!=="1"?
+                        (<button onClick={handleSubmit} className="main_search">좌석 선택</button>):
+                        (<></>)
+                    }
+                </div>       
+            </div>   
         </>
         )
     }

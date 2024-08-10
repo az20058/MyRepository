@@ -128,7 +128,7 @@ export default function Reservation(props){
     function handleSubmit(e){
         e.preventDefault();
         for(let i=0;i<quantity;i++){
-          if(formDataArray[i].firstName==""&&formDataArray[i].birthDate==""&&formDataArray[i].lastName==""&&formDataArray[i].gender==""&&formDataArray[i].nationality==""&&formDataArray[i].email==""){
+          if(formDataArray[i].firstName==""||formDataArray[i].birthDate==""||formDataArray[i].lastName==""||formDataArray[i].gender==""||formDataArray[i].nationality==""||formDataArray[i].email==""){
             alert("빈 항목이 있습니다.");
             return;
           }

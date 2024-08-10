@@ -1,7 +1,6 @@
 "use client";
 
 import cookie from "js-cookie";
-import { useEffect } from "react";
 
 export function getLoginState(){
     // if (typeof window !== 'undefined') {
