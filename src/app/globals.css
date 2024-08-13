@@ -409,7 +409,47 @@ background text
     opacity: 0.5;
 }
 
+.reserved {
+  background-color: #555549;
+  opacity: 1;
+}
+
+.selected {
+  background-color: #d80f0f;
+  opacity: 1;
+}
+
+.seat:nth-child(3) {
+  margin-right: 50px;
+}
+
+.seat:nth-child(7) {
+  margin-right: 50px;
+}
+
 .seat:hover{
+  opacity: 1;
+  transition: all 0.7s;
+}
+
+.reserved::before,
+.reserved::after {
+  content: '';
+  position: absolute;
+  width: 2px; /* 선의 두께 */
+  height: 100%; /* 선의 길이 */
+  background-color: white; /* 선의 색상 */
+}
+
+.reserved::before {
+  transform: rotate(45deg);
+}
+
+.reserved::after {
+  transform: rotate(-45deg);
+}
+
+.selected:hover {
   opacity: 1;
   transition: all 0.7s;
 }
